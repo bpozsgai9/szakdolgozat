@@ -19,30 +19,29 @@ fetch("output.json")
     //forma
     let options = {
         autoResize: true,
-        nodes:{
-            color: {
-                border: 'red',
-                background: 'red'
+        nodes: {
+            shape: "dot",
+            scaling: {
+              min: 10,
+              max: 30,
             },
-            font: '12px arial white',
-            shadow: true
-        },
-        edges:{
-            arrows: 'to',
-            color: 'black',
-            font: '20px arial',
-            shadow: true
-        },
+            font: {
+              size: 12,
+              face: "Tahoma",
+            },
+          },
+          edges: {
+            color: { inherit: true },
+            width: 0.15,
+            smooth: {
+              type: "continuous",
+            },
+          },
         interaction: {
-            hideEdgesOnDrag: true
+            hideEdgesOnDrag: true,
+            tooltipDelay: 200
         },
-        physics: false,
-        groups: {
-            group_1: {
-                color:'blue',
-                shape:'box'
-            }
-        }
+        physics: false
     };
 
     //létrehozás
