@@ -1,7 +1,6 @@
 //gráf helye
 let networkDiv = document.getElementById('myNetwork');
-networkDiv.style.width = window.innerWidth + "px";
-networkDiv.style.height = window.innerHeight + "px";
+let graphDiv = document.getElementById('graphDiv');
 
 fetch("output.json")
   .then(response => response.json())
@@ -47,6 +46,4 @@ fetch("output.json")
     //létrehozás
     let network = new vis.Network(networkDiv, graph, options);
 });
-
-
 
