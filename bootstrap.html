@@ -31,25 +31,53 @@
               </li>
             </ul>
           </div>
+          <span class="navbar-text">
+            University Of Szeged 2022.
+            <img src="szte-logo.svg" height="50">
+        </span>
         </div>
       </nav>
     </div>
     <div class="container-fluid fill">
         <div class="row" >
-            <div class="col-sm-3 p-3 bg-primary text-white">
-                itt gombok lesznek
+            <div class="col-sm-2 p-3 bg-secondary text-white">
+                data:<br />
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                <br />
+
+                data2:<br />
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                <br />
+
+                data2:<br />
+                <input type="button" value="try">
+                <br />
+
+                data4:<br />
+                <input type="button" value="try">
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-8">
                 <div id="myNetwork"></div>
-                <script>
-                    let myNavbar = document.getElementById('myNavbar');
-                    let myDivSize = window.innerHeight - myNavbar.clientHeight;
-                    let myNetwork = document.getElementById('myNetwork');
-                    myNetwork.style.height = myDivSize + "px";
-                </script>
-                <script type="text/javascript" src="index.js"></script>
+            </div>
+            <div class="col-sm-2 p-3 bg-secondary text-white">
+               <script>
+                let edgeNum = 0;
+                let nodeNum = 0;
+                document.write(`
+                number of edges: ${edgeNum}<br />
+                number of nodes: ${nodeNum}
+                `);
+               </script>
             </div>
         </div>
     </div>
+    <script>
+        let myNavbar = document.getElementById('myNavbar');
+        let myFooter = document.getElementById('myFooter');
+        let myDivSize = window.innerHeight - myNavbar.clientHeight;
+        let myNetwork = document.getElementById('myNetwork');
+        myNetwork.style.height = myDivSize + "px";    
+    </script>
+    <script type="text/javascript" src="index.js"></script>
 </body>
 </html>
