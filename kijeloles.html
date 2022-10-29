@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!--gráf-->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
     <!--bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -14,6 +17,19 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>-->
     <title>Code</title>
+    <style>    
+        body {
+            color: #d3d3d3;
+            font: 12pt arial;
+            background-color: #222222;
+        }
+
+        #mynetwork {
+            width: 800px;
+            height: 800px;
+            background-color: #222222;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -38,54 +54,77 @@ public class Main {
                     </code>
                 </pre>
             </div>
+            <!--gráf helye-->
+
             <div class="col">
-                <div class="card ">
-                    <div class="card-body">
-                        <h5 class="card-title">main</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">myMethod</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">myMethod2</h5>
-                    </div>
-                </div>
+                <div id="mynetwork" style="height: 300px;"></div>
             </div>
         </div>
     </div>
     <script>
-        let cards = document.getElementsByClassName('card');
-        let text = document.getElementsByTagName('code')[0].innerText;
 
-        for (let i = 0; i < cards.length; i++) {
-            
-            let methodName = cards[i].getElementsByTagName('h5')[0].innerText;
-            let modified = '<span style="background-color:red">' + methodName + '</span>';
-            
-            cards[i].addEventListener('mouseover', e => {
+        //gráf létrehozás
+        let nodes = new vis.DataSet([
+            { id: 0, label: "Main", group: 'class' },
+            { id: 1, label: "main",  group: 'method' },
+            { id: 2, label: "myMethod",  group: 'method' },
+            { id: 3, label: "myMethod2",  group: 'method' }
+        ]);
+    
+        let edges = new vis.DataSet([
+            { from: 0, to: 1 },
+            { from: 0, to: 2 },
+            { from: 0, to: 3 }
+        ]);
+
+        let options = {
+            nodes: {
+                color: {
+                    border: '#77a5fc',
+                    background: '#77a5fc',
+                    highlight: {
+                    border: '#fcca03',
+                    background: '#fcca03'
+                    }
+                }
+            },
+            edges: {},
+            groups: {
+                class: {
+                    color: { background: '#77a5fc', border: '#77a5fc' },
+                    shape: 'circle'
+                },
+                method: {
+                    color: { background: '#77a5fc', border: '#77a5fc' },
+                    shape: 'triangleDown'
+                }
+            }
+        };
+    
+        let container = document.getElementById("mynetwork");
+        let data = {
+            nodes: nodes,
+            edges: edges,
+        };
+        let network = new vis.Network(container, data, options);
+
+        let methodName = '';
+        network.on('click', ev => {
+
+            let selectedNodeId = network.getSelection().nodes[0];
+            let text = document.getElementsByTagName('code')[0].innerText;
+
+            //console.log(network.body.nodes[selectedNodeId].options.label);
+            methodName = network.body.nodes[selectedNodeId].options.label;
+
+            let substring = new RegExp(methodName, 'gi');
+            let modified = text.replace(substring, (match) => {
+
+                return '<span style="background-color:#fcca03">' + match + '</span>';
                 
-                cards[i].setAttribute("style", "background-color:#fcca03;");
-
-                let substring = new RegExp(methodName, 'gi');
-                let modified = text.replace(substring, (match) => {
-
-                    return '<span style="background-color:#fcca03">' + match + '</span>';
-                
-                });
-
-                document.getElementsByTagName('code')[0].innerHTML = modified;
-
             });
-            cards[i].addEventListener('mouseout', e => {
-                cards[i].setAttribute("style", "background-color:none;");
-                document.getElementsByTagName('code')[0].innerText = text;
-
-            }); 
-        }
+            document.getElementsByTagName('code')[0].innerHTML = modified;
+        });        
     </script>
 </body>
 </html>
