@@ -18,16 +18,17 @@
     <script>hljs.highlightAll();</script>-->
     <title>Code</title>
     <style>    
-        body {
-            color: #d3d3d3;
-            font: 12pt arial;
-            background-color: #222222;
-        }
-
         #mynetwork {
-            width: 800px;
-            height: 800px;
-            background-color: #222222;
+            height: 400px;
+            background-color: #fff;
+        }
+        body {
+            background-color: #222;
+        }
+        pre {
+            padding: 20px;
+            height: 400px;
+            background-color: #fff;
         }
     </style>
 </head>
@@ -57,7 +58,7 @@ public class Main {
             <!--gráf helye-->
 
             <div class="col">
-                <div id="mynetwork" style="height: 300px;"></div>
+                <div id="mynetwork"></div>
             </div>
         </div>
     </div>
@@ -116,8 +117,9 @@ public class Main {
 
             //console.log(network.body.nodes[selectedNodeId].options.label);
             methodName = network.body.nodes[selectedNodeId].options.label;
+            let regExPattern = `\\b${methodName}\\b`;
 
-            let substring = new RegExp(methodName, 'gi');
+            let substring = new RegExp(regExPattern, 'g');
             let modified = text.replace(substring, (match) => {
 
                 return '<span style="background-color:#fcca03">' + match + '</span>';
