@@ -5,12 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="src/bootstrap.min.css">
+    <script src="src/bootstrap.bundle.min.js"></script>
+
+    <!--gráf-->
+    <script type="text/javascript" src="src/vis-network.min.js"></script>
+    <link rel="stylesheet" href="src/vis-network.min.css">
 
     <!--kiemelés-->
-    <script src="highlight_js_src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="src/highlight_js_src/ace.js" type="text/javascript" charset="utf-8"></script>
     <title>Layout</title>
     <style>
         body {
@@ -43,14 +48,14 @@
     <nav class="navbar navbar-expand-sm" id="myNavbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="osa-logo.svg" height="50"><br>
+                <img src="src/pic/osa-logo.svg" height="50"><br>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <span class="navbar-text">
                 <span>University Of Szeged 2022.</span>
-                <img src="szte-logo.svg" height="50">
+                <img src="src/pic/szte-logo.svg" height="50">
             </span>
         </div>
     </nav>
@@ -79,7 +84,7 @@ public class Main {
                     </div>
                     <!--gráf helye-->
                     <div class="col">
-                        <div id="myNetwork">
+                        <div id="mynetwork">
                             <script type="text/javascript" src="graph.js"></script>
                         </div>
                     </div>
@@ -93,6 +98,7 @@ public class Main {
                 editor.session.setMode("ace/mode/java");
                 editor.setHighlightActiveLine(true);
                 editor.session.setTabSize(4);
+
                 //kijelölés
                 let methodName = '';
 
@@ -100,14 +106,13 @@ public class Main {
                     network.on('click', ev => {
 
                         let selectedNodeId = network.getSelection().nodes[0];
-                        let textElemenet = document.getElementsByTagName('textarea')[0]
-                        let text = textElemenet.innerText;
-
-
                         methodName = network.body.nodes[selectedNodeId].options.label;
+
+                        
                         /*
                         //console.log(network.body.nodes[selectedNodeId].options.label);
-                        
+                        let text = document.getElementsByTagName('textarea')[0].innerText;
+
                         let regExPattern = `\\b${methodName}\\b`;
                     
                         let substring = new RegExp(regExPattern, 'g');

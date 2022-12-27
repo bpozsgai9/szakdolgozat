@@ -1,5 +1,5 @@
 //gráf helye
-let networkDiv = document.getElementById('myNetwork');
+let networkDiv = document.getElementById('mynetwork');
 let graphDiv = document.getElementById('graphDiv');
 var network = null;
 
@@ -11,6 +11,13 @@ fetch("output.json")
             nodes: new vis.DataSet(outputJson["nodes"]),
             edges: new vis.DataSet(outputJson["edges"])
         };
+
+        //asszinkorn
+        let groupArr = [];
+        graph.nodes.array.forEach(element => {
+            groupArr = element.group;
+        });
+        console.log(groupArr);
 
         //valamiért ezt nem látja
         //forma
@@ -25,7 +32,7 @@ fetch("output.json")
                     }
                 }
             },
-            edges: {},
+            edges: {}/*,
             groups: {
                 class: {
                     color: { background: '#77a5fc', border: '#77a5fc' },
@@ -35,7 +42,7 @@ fetch("output.json")
                     color: { background: '#77a5fc', border: '#77a5fc' },
                     shape: 'triangleDown'
                 }
-            }
+            }*/
         };
 
         network = new vis.Network(networkDiv, graph, options);
