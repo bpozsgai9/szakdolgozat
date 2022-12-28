@@ -93,43 +93,11 @@ public class Main {
 
             <!--editor-->
             <script>
-                let editor = ace.edit("editor");
+                var editor = ace.edit("editor");
                 editor.setTheme("ace/theme/monokai");
                 editor.session.setMode("ace/mode/java");
                 editor.setHighlightActiveLine(true);
                 editor.session.setTabSize(4);
-
-                //kijelölés
-                let methodName = '';
-
-                if (network != null) {
-                    network.on('click', ev => {
-
-                        let selectedNodeId = network.getSelection().nodes[0];
-                        methodName = network.body.nodes[selectedNodeId].options.label;
-
-                        
-                        /*
-                        //console.log(network.body.nodes[selectedNodeId].options.label);
-                        let text = document.getElementsByTagName('textarea')[0].innerText;
-
-                        let regExPattern = `\\b${methodName}\\b`;
-                    
-                        let substring = new RegExp(regExPattern, 'g');
-                        let modified = text.replace(substring, (match) => {
-                    
-                            return '<span style="background-color:#fcca03;font-weight:bold">' + match + '</span>';
-                            
-                        });
-                        document.getElementsByTagName('code')[0].innerText = modified;*/
-
-                        editor.find(methodName, {
-                            caseSensitive: true,
-                            wholeWord: true
-                        });
-                    });
-                }
-
             </script>
         </div>
     </div>

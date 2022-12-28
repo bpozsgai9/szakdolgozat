@@ -1,51 +1,75 @@
 //gráf helye
 let networkDiv = document.getElementById('mynetwork');
 let graphDiv = document.getElementById('graphDiv');
-var network = null;
+var network;
+var graph;
+var options;
+var json;
 
 fetch("output.json")
     .then(response => response.json())
     .then(outputJson => {
 
-        let graph = {
-            nodes: new vis.DataSet(outputJson["nodes"]),
-            edges: new vis.DataSet(outputJson["edges"])
+        json = outputJson;
+        graph = {
+            nodes: new vis.DataSet(json["nodes"]),
+            edges: new vis.DataSet(json["edges"])
         };
 
-        //asszinkorn
-        let groupArr = [];
-        graph.nodes.array.forEach(element => {
-            groupArr = element.group;
-        });
-        console.log(groupArr);
+    }).then(() => {
 
-        //valamiért ezt nem látja
-        //forma
-        let options = {
+        const randomColour = () => `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`;
+
+
+        let myGroups = {};
+        for (let node of json["nodes"]) {
+            if (node.group in myGroups) {
+                
+                console.log("pass");
+            
+            } else {
+                let myColor = randomColour();
+                myGroups[node.group] = {
+                    color: { background: myColor, border: myColor },
+                    shape: 'box'
+                };
+            }
+        }
+            
+        options = {
             nodes: {
                 color: {
-                    border: '#77a5fc',
-                    background: '#77a5fc',
                     highlight: {
                         border: '#fcca03',
                         background: '#fcca03'
                     }
                 }
             },
-            edges: {}/*,
-            groups: {
-                class: {
-                    color: { background: '#77a5fc', border: '#77a5fc' },
-                    shape: 'circle'
+            edges: {
+                color: {
+                    background: '#fcca03'
                 },
-                method: {
-                    color: { background: '#77a5fc', border: '#77a5fc' },
-                    shape: 'triangleDown'
-                }
-            }*/
+                arrows: 'to'
+            },
+            groups: myGroups
         };
 
         network = new vis.Network(networkDiv, graph, options);
+
+        //kijelölés
+        let methodName = '';
+
+        network.on('click', ev => {
+
+            let selectedNodeId = network.getSelection().nodes[0];
+            methodName = network.body.nodes[selectedNodeId].options.label;
+            console.log(network.body.nodes[selectedNodeId].options.label);
+
+            editor.find(methodName, {
+                caseSensitive: true,
+                wholeWord: true
+            });
+        });
     });
 
 
