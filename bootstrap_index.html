@@ -1,106 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--bootstrap-->
+        <link rel="stylesheet" href="src/bootstrap.min.css">
+        <script src="src/bootstrap.bundle.min.js"></script>
 
-    <!--bootstrap-->
-    <link rel="stylesheet" href="src/bootstrap.min.css">
-    <script src="src/bootstrap.bundle.min.js"></script>
+        <!--gráf-->
+        <script type="text/javascript" src="src/vis-network.min.js"></script>
+        <link rel="stylesheet" href="src/vis-network.min.css">
 
-    <!--gráf-->
-    <script type="text/javascript" src="src/vis-network.min.js"></script>
-    <link rel="stylesheet" href="src/vis-network.min.css">
+        <!--kiemelés-->
+        <script src="src/highlight_js_src/ace.js" type="text/javascript" charset="utf-8"></script>
+        <title>Layout</title>
+        <style>
+            body {
+                background-color: #2F3129;
+                font-family: "Open Sans", sans-serif;
+            }
+            span {
+                color: #fff;
+            }
 
-    <!--kiemelés-->
-    <script src="src/highlight_js_src/ace.js" type="text/javascript" charset="utf-8"></script>
-    <title>Layout</title>
-    <style>
-        body {
-            background-color: #2F3129;
-            font-family: "Open Sans", sans-serif;
+            #myNavbar {
+                background-color: #272822;
+                height: 10vh;
+            }
+
+            #editor {
+                padding: 20px;
+                height: 80vh;
+                width: 30vw;
+            }
+
+            #mynetwork {
+                background-color: #fff;
+                height: 80vh;
+                width: 50vw;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="master">
+            <nav class="navbar navbar-expand-sm" id="myNavbar">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="src/pic/osa-logo.svg" height="50"><br>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <span class="navbar-text">
+                        <span>University Of Szeged 2022.</span>
+                        <img src="src/pic/szte-logo.svg" height="50">
+                    </span>
+                </div>
+            </nav>
+            </div>
+            <div class="container-fluid fill">
+                <div class="row gx-0">
+                    <div class="container">
+                        <div class="row gx-0">
+                            <div class="col">
+                                <div id="editor">
+        public class Main {
+            static void myMethod() {
+                System.out.println("1");
+            }
+        
+            static void myMethod2() {
+                System.out.println("2");
+            }
+        
+            public static void main(String[] args) {
+                myMethod();
+                myMethod2();
+            }
         }
-
-        span {
-            color: #fff;
-        }
-
-        #myNavbar {
-            background-color: #272822;
-        }
-
-        #editor {
-            padding: 20px;
-            height: 400px;
-            width: 100%;
-        }
-
-        #mynetwork {
-            background-color: #fff;
-            height: 400px;
-        }
-    </style>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-sm" id="myNavbar">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="src/pic/osa-logo.svg" height="50"><br>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <span class="navbar-text">
-                <span>University Of Szeged 2022.</span>
-                <img src="src/pic/szte-logo.svg" height="50">
-            </span>
-        </div>
-    </nav>
-    </div>
-    <div class="container-fluid fill">
-        <div class="row">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div id="editor">
-public class Main {
-    static void myMethod() {
-        System.out.println("1");
-    }
-
-    static void myMethod2() {
-        System.out.println("2");
-    }
-
-    public static void main(String[] args) {
-        myMethod();
-        myMethod2();
-    }
-}
+                                </div>
+                            </div>
+                            <!--gráf helye-->
+                            <div class="col">
+                                <div id="mynetwork">
+                                    <script type="text/javascript" src="graph.js"></script>
+                                </div>
+                            </div>
+                            <!--metrikák helye-->
+                            <div class="col">
+                                <div style="color: #fff;">metrika hely</div>
+                            </div>
                         </div>
-                    </div>
-                    <!--gráf helye-->
-                    <div class="col">
-                        <div id="mynetwork">
-                            <script type="text/javascript" src="graph.js"></script>
+                        <div class="row gx-0">
+                            <div style="color: #fff;">alsó lófasz</div>
                         </div>
-                    </div>
+                    </div>                
                 </div>
             </div>
-
-            <!--editor-->
-            <script>
-                var editor = ace.edit("editor");
-                editor.setTheme("ace/theme/monokai");
-                editor.session.setMode("ace/mode/java");
-                editor.setHighlightActiveLine(true);
-                editor.session.setTabSize(4);
-            </script>
         </div>
-    </div>
-</body>
-
+        <script>
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.session.setMode("ace/mode/java");
+            editor.setHighlightActiveLine(true);
+            editor.session.setTabSize(4);
+        </script>
+    </body>
 </html>
