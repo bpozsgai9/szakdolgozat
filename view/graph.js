@@ -6,7 +6,7 @@ var graph;
 var options;
 var json;
 
-fetch("output.json")
+fetch("../src/source/output.json")
     .then(response => response.json())
     .then(outputJson => {
 

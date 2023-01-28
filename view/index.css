@@ -1,0 +1,29 @@
+body {
+    background-color: #2F3129;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  span {
+    color: #fff;
+  }
+
+  #myNavbar {
+    background-color: #272822;
+    height: 10vh;
+  }
+
+  #editor {
+    padding: 20px;
+    height: 80vh;
+  }
+
+  #mynetwork {
+    background-color: #fff;
+    height: 80vh;
+    width: 50vw;
+  }
+
+  #footer {
+    height: 10vh;
+    width: 100vw;
+  }
