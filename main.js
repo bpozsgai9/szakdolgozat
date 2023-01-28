@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog } = require('electron')
+const { app, BrowserWindow, dialog, Notification } = require('electron')
 const path = require('path')
 const fs = require('fs');
 
@@ -12,16 +12,28 @@ const createWindow = () => {
     icon: 'src/pic/osa.ico'
   })
   
+  //értesítés
+  let sourceNotification = new Notification({ 
+    title: 'Notification from OSA:\nLoad Source File',
+    body: 'Please choose a source file to analyze!'
+  })
+
+  let outputNotification = new Notification({ 
+    title: 'Notification from OSA:\nLoad Graph File',
+    body: 'Please choose a json file to analyze!'
+  })
+
+  //forrás dialóg
+  sourceNotification.show()
   dialog.showOpenDialog(window, {properties: ['openFile']})
   .then((res) => {
-      if (!res.canceled) {
 
+      if (!res.canceled) {
         fs.copyFile(res.filePaths[0], 'src/source/source.java', (err) => {
           
           if (err) throw err;
           console.log('source.txt was copied to destination.txt');
         });
-        
 
       } else {
           console.log("No file selected!");
@@ -31,7 +43,8 @@ const createWindow = () => {
   })
 }
 
-app.whenReady().then(() => {
+app.whenReady()
+.then(() => {
   createWindow()
 
   app.on('activate', () => {
