@@ -8,7 +8,8 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
+    icon: 'src/pic/osa.ico'
   })
   
   dialog.showOpenDialog(window, {properties: ['openFile']})
@@ -39,6 +40,8 @@ app.whenReady().then(() => {
 })
 
 app.on('window-all-closed', () => {
+  
+  fs.unlinkSync('src/source/source.java');
   if (process.platform !== 'darwin') app.quit()
 })
 
