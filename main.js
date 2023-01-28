@@ -18,6 +18,7 @@ const createWindow = () => {
     body: 'Please choose a source file to analyze!'
   })
 
+  //TODO:Ezt nem jelzi ki, innen folytatás
   let outputNotification = new Notification({ 
     title: 'Notification from OSA:\nLoad Graph File',
     body: 'Please choose a json file to analyze!'

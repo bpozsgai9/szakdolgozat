@@ -1,4 +1,2 @@
-## Szakdolgozat
-
-# Statikus Forráskódelemző Kimeneteinek Vizualizálása Fagráfokon
+## Statikus Forráskódelemző Kimeneteinek Vizualizálása Fagráfokon
 
