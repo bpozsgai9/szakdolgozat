@@ -1,14 +1,15 @@
-public class Main {
-              static void myMethod() {
-              System.out.println("1");
-              }
+public class Example {
 
-              static void myMethod2() {
-              System.out.println("2");
-              }
+    static void myMethod() {
+        System.out.println("1");
+    }
 
-              public static void main(String[] args) {
-              myMethod();
-              myMethod2();
-              }
-              }
+    static void myMethod2() {
+        System.out.println("2");
+    }
+
+    public static void main(String[] args) {
+        myMethod();
+        myMethod2();
+    }
+}
